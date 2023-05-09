@@ -1,6 +1,6 @@
 import Archetype, { Mage } from './Archetypes';
 import Energy from './Energy';
-import Fighter from './Fighter';
+import Fighter, { SimpleFighter } from './Fighter';
 import Race, { Elf } from './Races';
 
 type CharacterOptions = {
@@ -54,11 +54,11 @@ export default class Character implements Fighter {
   get race(): Race { return this._race; }
   get archetype(): Archetype { return this._archetype; }
 
-  attack(enemy: Fighter): void {
+  attack(enemy: SimpleFighter): void {
     enemy.receiveDamage(this._strength);
   }
 
-  special?(enemy: Fighter): void {
+  special?(enemy: SimpleFighter): void {
     if (this._energy.amount < this._archetype.cost) {
       throw new Error('Not enough energy');
     }
